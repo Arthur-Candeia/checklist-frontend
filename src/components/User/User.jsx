@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { userLogin } from "./connect/db"
+import { userLogin } from "../../connect/db"
 
-export default function teste({user}) {
+export default function User({user}) {
 
   const [loginUser, setLoginUser] = useState('')
   const navigate = useNavigate()
