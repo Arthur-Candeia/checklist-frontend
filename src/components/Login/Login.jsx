@@ -4,7 +4,7 @@ import {AiFillEye} from 'react-icons/ai'
 import { userLogin } from "../../connect/db";
 import './Login.scss'
 
-export function Login() {
+export function Login({userInfo}) {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
@@ -17,11 +17,14 @@ export function Login() {
     setPassword(ev.target.value)
   }
 
-  
-
   function forLogin(ev) {
     ev.preventDefault()
-    userLogin(user, password).then((result) =>  navigate(`/login/${JSON.stringify(result)}`))
+    userLogin(user, password).then((result) => {
+      sessionStorage.user = user
+      sessionStorage.password = password
+      userInfo(result)
+      navigate('/login')
+    })
   }
 
   return (

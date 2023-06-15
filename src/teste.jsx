@@ -1,13 +1,26 @@
-import { useState } from "react"
-import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { userLogin } from "./connect/db"
 
-export default function teste() {
-  let {tasks} = useParams()
-  let userTasks = JSON.parse(tasks)
-  
+export default function teste({user}) {
+
+  const [loginUser, setLoginUser] = useState('')
+
+  useEffect(() => {
+    console.log('vezes')
+    if (sessionStorage.user) {
+        userLogin(sessionStorage.user, sessionStorage.password).then((result) => {
+        setLoginUser(result.user)
+      })
+    }
+    else {
+      setLoginUser(user.user)
+    }
+  }, [])
+
   return (
     <div>
-      {console.log(userTasks.tasks)}
+      <h1>{loginUser.name}</h1>
+      {console.log(loginUser)}
     </div>
   )
 }
