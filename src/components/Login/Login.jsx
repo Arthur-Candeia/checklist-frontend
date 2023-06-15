@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {AiFillEye} from 'react-icons/ai'
+import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
 import { userLogin } from "../../connect/db";
+import {eyeClick} from "./functions";
 import './Login.scss'
 
 export function Login({userInfo}) {
@@ -19,11 +20,19 @@ export function Login({userInfo}) {
 
   function forLogin(ev) {
     ev.preventDefault()
+    document.querySelector('.err').style.visibility = 'hidden'
     userLogin(user, password).then((result) => {
-      sessionStorage.user = user
-      sessionStorage.password = password
-      userInfo(result)
-      navigate('/login')
+      if (!result.err) {
+        sessionStorage.user = user
+        sessionStorage.password = password
+        userInfo(result)
+        navigate('/login')
+      }
+      else {
+        const err = document.querySelector('.err')
+        err.textContent = result.err
+        err.style.visibility = 'visible'
+      }
     })
   }
 
@@ -36,10 +45,12 @@ export function Login({userInfo}) {
         <input type="text" name="user" id="user" value={user} onChange={(ev) => changeUser(ev)} required/>
       </div>
 
-      <div className="inputs">
+      <div className="inputs seeError">
         <label htmlFor="password">Senha</label>
         <input type="password" name="password" id="password" value={password} onChange={(ev) => changePassword(ev)} required />
-        <span id="eye"><AiFillEye></AiFillEye></span>
+        <span className="eye visible" onClick={eyeClick}><AiOutlineEye /></span>
+        <span className="eye invisible" onClick={eyeClick} style={{display: 'none'}}><AiOutlineEyeInvisible /></span>
+        <span className="err">.</span>
       </div>
 
       <input type="submit" value="ENTRAR" />
