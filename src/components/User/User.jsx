@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
-import { json, useNavigate } from "react-router-dom"
-import { userLogin, updateDoneTask } from "../../connect/db"
+import { FaPencilAlt} from 'react-icons/fa'
+import {BsTrash3Fill, BsFillSendFill} from 'react-icons/bs'
+import { useNavigate } from "react-router-dom"
+import { userLogin, updateDoneTask, newTask } from "../../connect/db"
+import './User.scss';
 
 export default function User({user}) {
 
   const [loginUser, setLoginUser] = useState('')
-  const [check, setCheck] = useState(false)
+  const [inputTasks, setInputTasks] = useState('')
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -25,20 +28,45 @@ export default function User({user}) {
     }
   }, [])
 
+  async function saveTask(ev) {
+    ev.preventDefault()
+    try{await newTask(loginUser._id, inputTasks); location.reload()}
+    catch{location.reload()}
+  }
+
   return (
     <div>
       <h1>{loginUser.name}</h1>
       <table>
+        <thead>
+          <tr style={{textAlign: 'left', position: 'relative'}}>
+            <th colSpan={3}>
+              <form onSubmit={(ev) => saveTask(ev)}>
+                <input type="text" name="inputTasks" id="inputTasks" value={inputTasks} onChange={(ev) => setInputTasks(ev.target.value)} placeholder="Adicionar nova tarefa"/>
+                <button type="submit" id="submit"><BsFillSendFill /></button>
+              </form>
+            </th>
+          </tr>
+          <tr>
+            <th>Tarefas</th>
+            <th>Estado</th>
+            <th>Opções</th>
+          </tr>
+        </thead>
         <tbody>
           {loginUser?.tasks?.map((element, index) => {
             return (
               <tr key={index}>
                 <td className={element.done ? 'content checked' : 'content'}>{element.content}</td>
-                <td>
+                <td className="checks">
                   <input type="checkbox" name="check" id={element._id} defaultChecked={loginUser.tasks[index].done} 
                   onClick={() => updateDoneTask(loginUser._id, element._id, element.done, index, setLoginUser)}
                   />
-                  </td>
+                </td>
+                <td className="options">
+                  <button className="pencil"><FaPencilAlt /></button>
+                  <button className="trash"><BsTrash3Fill /></button>
+                </td>
               </tr>
             )
           })}

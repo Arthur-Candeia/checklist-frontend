@@ -37,7 +37,7 @@ export function Login({userInfo}) {
   }
 
   return (
-    <form autoComplete="on" method="POST" onSubmit={(ev) => forLogin(ev)}>
+    <form autoComplete="on" method="POST" onSubmit={(ev) => forLogin(ev)} id="formLogin">
       <h1>CHECKLIST &#x2705;</h1>
 
       <div className="inputs">
