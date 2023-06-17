@@ -6,12 +6,11 @@ export async function userLogin(name, password) {
   return data;
 }
 
-export async function updateDoneTask(user, id, currentCondition, position) {
-  const newCondition = currentCondition ? 'false' : 'true';
-  const headers = new Headers({'Content-Type': 'application/json'})
-  const body = '{}'
+export async function updateDoneTask(user, id, currentCondition, position, setLoginUser) {
+  const newCondition = currentCondition ? 'false' : 'true'
   const objectSessionStorage = JSON.parse(sessionStorage.data)
-  objectSessionStorage.tasks[position].done = newCondition == 'true' ? true : false
+  objectSessionStorage.tasks[position].done = newCondition === 'true' ? true : false
   sessionStorage.data = JSON.stringify(objectSessionStorage)
-  await fetch(`https://checklist-fullstack.vercel.app/login/done/${user}/${id}/${newCondition}?_method=put`, {headers, body, method: 'PUT'})
+  setLoginUser(objectSessionStorage)
+  await fetch(`https://checklist-fullstack.vercel.app/login/done/${user}/${id}/${newCondition}?_method=put`, {method: 'PUT'})
 }
