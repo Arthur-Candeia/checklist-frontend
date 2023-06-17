@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { FaPencilAlt} from 'react-icons/fa'
 import {BsTrash3Fill, BsFillSendFill} from 'react-icons/bs'
 import { useNavigate } from "react-router-dom"
-import { userLogin, updateDoneTask, newTask } from "../../connect/db"
+import { userLogin, updateDoneTask, newTask, deleteTask } from "../../connect/db"
 import './User.scss';
 
 export default function User({user}) {
@@ -17,21 +17,25 @@ export default function User({user}) {
       sessionStorage.data = JSON.stringify(user.user)
     }
     else {
-      try {
-        userLogin(sessionStorage.user, sessionStorage.password).then((result) => {
-          if (!result.err) {
-            setLoginUser(result.user)
-          }
-        })
-      }
-      catch {!user && !sessionStorage.data ? navigate('/') : ''}
+      loadPage()
     }
   }, [])
 
+  function loadPage() {
+    try {
+      userLogin(sessionStorage.user, sessionStorage.password).then((result) => {
+        if (!result.err) {
+          setLoginUser(result.user)
+        }
+      })
+    }
+    catch {!user && !sessionStorage.data ? navigate('/') : ''}
+  }
+
   async function saveTask(ev) {
     ev.preventDefault()
-    try{await newTask(loginUser._id, inputTasks); location.reload()}
-    catch{location.reload()}
+    setInputTasks('')
+    await newTask(loginUser._id, inputTasks, loadPage)
   }
 
   return (
@@ -60,12 +64,12 @@ export default function User({user}) {
                 <td className={element.done ? 'content checked' : 'content'}>{element.content}</td>
                 <td className="checks">
                   <input type="checkbox" name="check" id={element._id} defaultChecked={loginUser.tasks[index].done} 
-                  onClick={() => updateDoneTask(loginUser._id, element._id, element.done, index, setLoginUser)}
+                  onClick={() => updateDoneTask(loginUser._id, element._id, element.done, loadPage)}
                   />
                 </td>
                 <td className="options">
                   <button className="pencil"><FaPencilAlt /></button>
-                  <button className="trash"><BsTrash3Fill /></button>
+                  <button className="trash" onClick={() => deleteTask(loginUser._id, index, loadPage)}><BsTrash3Fill /></button>
                 </td>
               </tr>
             )
