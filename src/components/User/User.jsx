@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { userLogin } from "../../connect/db"
+import { userLogin, updateDoneTask } from "../../connect/db"
 
 export default function User({user}) {
 
@@ -18,11 +18,25 @@ export default function User({user}) {
     }
   }, [])
 
-
   return (
     <div>
       <h1>{loginUser.name}</h1>
-      <p>{loginUser?.tasks?.map((element, index) => <li key={index}>{element.content}</li>)}</p>
+      <table>
+        <tbody>
+          {loginUser?.tasks?.map((element, index) => {
+            return (
+              <tr key={index}>
+                <td className={element.done ? 'content checked' : 'content'}>{element.content}</td>
+                <td>
+                  <input type="checkbox" name="check" id={element._id} defaultChecked={loginUser.tasks[index].done} 
+                  onClick={() => updateDoneTask(loginUser._id, element._id, element.done, loginUser.tasks.indexOf(element))}
+                  />
+                  </td>
+              </tr>
+            )
+          })}
+        </tbody>
+        </table>
     </div>
   )
 }
