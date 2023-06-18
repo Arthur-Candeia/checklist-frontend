@@ -6,9 +6,9 @@ export async function userLogin(name, password) {
   return data;
 }
 
-export async function updateDoneTask(user, id, currentCondition, loadPage) {
+export async function updateDoneTask(user, index, currentCondition, loadPage) {
   const newCondition = currentCondition ? 'false' : 'true'
-  await fetch(`https://checklist-fullstack.vercel.app/login/done/${user}/${id}/${newCondition}?_method=put`, {method: 'PUT'})
+  await fetch(`https://checklist-fullstack.vercel.app/login/done/${user}/${index}/${newCondition}?_method=put`, {method: 'PUT'})
   loadPage()
 }
 
@@ -19,5 +19,10 @@ export async function newTask(user, content, loadPage) {
 
 export async function deleteTask(user, index, loadPage) {
   await fetch(`https://checklist-fullstack.vercel.app/login/${user}/${index}?_method=delete`, {method: 'DELETE'})
+  loadPage()
+}
+
+export async function editTask(user, index, content, loadPage) {
+  await fetch(`https://checklist-fullstack.vercel.app/login/${user}/${index}/${content}?_method=put`, {method: 'PUT'})
   loadPage()
 }
