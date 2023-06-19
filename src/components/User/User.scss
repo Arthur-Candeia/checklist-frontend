@@ -1,9 +1,16 @@
 @import '../../styles/coolors.scss';
 
+#welcome {
+  width: 100%;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.795);
+}
+
 table {
-  border: 1px solid black;
+  display: block;
   border-collapse: collapse;
-  border-radius: 3px;
+  display: block;
+  padding: 10px;
 
   th, tr, td {
     padding: 5px;
@@ -37,6 +44,7 @@ table {
   }
 
   td {
+    word-wrap: break-word;
     &.content {
       min-width: 280px;
       width: 50vw;
@@ -49,13 +57,26 @@ table {
 
     &.options {
       text-align: center;
+      min-width: 80px;
 
       button {
         cursor: pointer;
         margin: 0px 4px;
         padding: 5px;
         background-color: transparent;
+        border: 0.5px solid rgba(0, 0, 0, 0.726);
+        border-radius: 3px;
+      }
+
+      .trash {
+        color: red;
       }
     }
+
+    &.checked {
+      color: #00ff43;
+      text-decoration: line-through;
+    }
+
   }
 }

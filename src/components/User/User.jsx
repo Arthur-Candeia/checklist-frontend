@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { FaPencilAlt} from 'react-icons/fa'
 import {BsTrash3Fill, BsFillSendFill} from 'react-icons/bs'
 import { useNavigate } from "react-router-dom"
 import { userLogin, updateDoneTask, newTask, deleteTask, editTask } from "../../connect/db"
@@ -49,8 +48,8 @@ export default function User({user}) {
 
 
   return (
-    <div>
-      <h1>{loginUser.name}</h1>
+    <div id="pageUser">
+      <h1 id="welcome">{`Olá, ${loginUser.name}!`}</h1>
       <table>
         <thead>
           <tr style={{textAlign: 'left', position: 'relative'}}>
@@ -78,8 +77,8 @@ export default function User({user}) {
                   />
                 </td>
                 <td className="options">
-                  <button className="pencil" onClick={() => {setInputTasks(element.content); setItsNew(false); setPositionTask(index)}}><FaPencilAlt /></button>
-                  <button className="trash" onClick={() => {confirm(`Deseja realmente excluir a tarefa ${index}?`) ? deleteTask(loginUser._id, index, loadPage) : ''}}><BsTrash3Fill /></button>
+                  <button className="pencil" onClick={() => {setInputTasks(element.content); setItsNew(false); setPositionTask(index)}}>✏️</button>
+                  <button className="trash" onClick={() => {confirm(`Deseja realmente excluir a tarefa ${index + 1}?`) ? deleteTask(loginUser._id, index, loadPage) : ''}}><BsTrash3Fill /></button>
                 </td>
               </tr>
             )

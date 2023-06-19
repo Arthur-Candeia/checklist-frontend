@@ -43,16 +43,15 @@
     }
 
     .eye {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: grid;
+      place-items: center;
       position: absolute;
       right: 2%;
-      top: 33%;
+      top: 35%;
       cursor: pointer;
       font-size: 1.5em;
       background-color: white;
-      height: 33px;
+      height: 30px;
     }
 
     .err {
@@ -82,11 +81,5 @@
 
   #terms {
     font-size: 0.7em;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  #formLogin {
-    width: 90vw;
   }
 }
