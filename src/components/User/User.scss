@@ -1,9 +1,27 @@
 @import '../../styles/coolors.scss';
 
 #welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   width: 100%;
   text-align: center;
   color: rgba(0, 0, 0, 0.795);
+
+  #logout {
+    cursor: pointer;
+    padding: 8px 15px;
+    border: none;
+    background-color: $blue;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.363);
+    border-radius: 3px;
+
+    &:hover {
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.363);
+    }
+  }
 }
 
 table {
@@ -77,6 +95,5 @@ table {
       color: #00ff43;
       text-decoration: line-through;
     }
-
   }
 }

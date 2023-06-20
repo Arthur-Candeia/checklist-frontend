@@ -1,0 +1,45 @@
+@import '../../styles/coolors.scss';
+
+#termsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 30%;
+  width: 50vw;
+  max-width: 95%;
+  margin: 10px auto;
+  padding: 20px 40px;
+  background-color: $gray;
+  border-radius: 10px;
+}
+
+#termsTitle {
+  text-align: center;
+  font-size: 2em;
+}
+
+#termsContent {
+  word-wrap: break-word;
+  text-align: justify;
+  
+
+  p {
+    line-height: 1.7;
+    margin: 15px 0px;
+  }
+}
+
+.buttonHome {
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px 15px;
+  background-color: $blue;
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.363);
+  border-radius: 3px;
+
+  &:hover {
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.363);
+  }
+}

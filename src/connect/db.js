@@ -6,8 +6,11 @@ export async function userLogin(name, password) {
   return data;
 }
 
-export async function updateDoneTask(user, index, currentCondition, loadPage) {
+export async function updateDoneTask(user, index, currentCondition, tdClass, loadPage) {
   const newCondition = currentCondition ? 'false' : 'true'
+
+  document.getElementById(tdClass).classList.toggle('checked')
+
   await fetch(`https://checklist-fullstack.vercel.app/login/done/${user}/${index}/${newCondition}?_method=put`, {method: 'PUT'})
   loadPage()
 }

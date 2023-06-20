@@ -10,6 +10,7 @@ export default function User({user}) {
   const [inputTasks, setInputTasks] = useState('')
   const [itsNew, setItsNew] = useState(true)
   const [positionTask, setPositionTask] = useState('')
+  const [done, setDone] = useState()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export default function User({user}) {
         if (!result.err) {
           setLoginUser(result.user)
         }
+        else {!user && !sessionStorage.data ? navigate('/') : ''}
       })
     }
     catch {!user && !sessionStorage.data ? navigate('/') : ''}
@@ -46,10 +48,19 @@ export default function User({user}) {
     setItsNew(true)
   }
 
+  function logout() {
+    sessionStorage.removeItem('user')
+    sessionStorage.removeItem('password')
+    sessionStorage.removeItem('data')
+    navigate('/')
+  }
 
+  if (user || sessionStorage.data) {
   return (
     <div id="pageUser">
-      <h1 id="welcome">{`Olá, ${loginUser.name}!`}</h1>
+      <h1 id="welcome">{loginUser.name ? `Olá, ${loginUser.name}!` : ''}
+      <button id="logout" onClick={() => logout()}>SAIR</button>
+      </h1>
       <table>
         <thead>
           <tr style={{textAlign: 'left', position: 'relative'}}>
@@ -70,10 +81,11 @@ export default function User({user}) {
           {loginUser?.tasks?.map((element, index) => {
             return (
               <tr key={index}>
-                <td className={element.done ? 'content checked' : 'content'}>{element.content}</td>
+                <td className={(element.done ? 'content checked' : 'content')} id={element._id}>{element.content}</td>
                 <td className="checks">
-                  <input type="checkbox" name="check" id={element._id} defaultChecked={loginUser.tasks[index].done} 
-                  onClick={() => updateDoneTask(loginUser._id, index, element.done, loadPage)}
+                  <input type="checkbox" name="check" id={`input${index}`} checked={element.done} onChange={() => loadPage()}
+                  onClick={() => updateDoneTask(loginUser._id, index, element.done, element._id, loadPage)}
+                  style={{cursor: 'pointer'}}
                   />
                 </td>
                 <td className="options">
@@ -86,7 +98,7 @@ export default function User({user}) {
         </tbody>
         </table>
     </div>
-  )
+  )}
 }
 
 /*

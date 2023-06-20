@@ -53,7 +53,7 @@ export function Login({userInfo}) {
         </div>
         <input type="submit" value="ENTRAR" />
         <a className="links" onClick={() => navigate('/newUser')}>Cadastre-se</a>
-        <span id="terms">Ao usar Checklist você concorda com os <a className="links" onClick={() => navigate('/termos')}>Termos de Uso</a></span>
+        <span id="terms">Ao usar Checklist você concorda com os <a className="links" onClick={() => navigate('/terms')}>Termos de Uso</a></span>
       </form>
     </div>
   )
