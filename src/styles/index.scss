@@ -12,7 +12,7 @@ body {
   background-color: $green;
 }
 
-#login {
+#login, #newUserContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,12 +48,18 @@ body {
     }
 
     td {
-      
       &.content {
         min-width: 50vw;
         width: 63vw;
         max-width: 400px;
+        padding-left: 5px;
       }
+    }
+
+    #thTarefas {
+      min-width: 50vw;
+      width: 63vw;
+      max-width: 400px;
     }
   }
 

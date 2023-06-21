@@ -1,5 +1,5 @@
-export function eyeClick() {
-  const input = document.querySelector('#password')
+export function eyeClick(passwordInput) {
+  const input = document.querySelector(`#${passwordInput}`)
   const visible = document.querySelector('.visible')
   const invisible = document.querySelector('.invisible')
 

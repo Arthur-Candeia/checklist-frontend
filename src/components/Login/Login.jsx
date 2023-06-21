@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
 import { userLogin } from "../../connect/db";
 import {eyeClick} from "./functions";
+import { InputPassword, InputStandart } from "../Inputs/Inputs";
 import './Login.scss'
 
-export function Login({userInfo}) {
+export default function Login({userInfo}) {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
@@ -40,17 +40,9 @@ export function Login({userInfo}) {
     <div id="login">
       <form autoComplete="on" method="POST" onSubmit={(ev) => forLogin(ev)} id="formLogin">
         <h1>CHECKLIST &#x2705;</h1>
-        <div className="inputs">
-          <label htmlFor="user">Usuário</label>
-          <input type="text" name="user" id="user" value={user} onChange={(ev) => changeUser(ev)} required/>
-        </div>
-        <div className="inputs seeError">
-          <label htmlFor="password">Senha</label>
-          <input type="password" name="password" id="password" value={password} onChange={(ev) => changePassword(ev)} required />
-          <span className="eye visible" onClick={eyeClick}><AiOutlineEye /></span>
-          <span className="eye invisible" onClick={eyeClick} style={{visibility: 'hidden'}}><AiOutlineEyeInvisible /></span>
-          <span className="err">.</span>
-        </div>
+        <InputStandart id='user' user={user} changeUser={setUser}/>
+        <InputPassword id='password' password={password} changePassword={setPassword} eyeClick={eyeClick}/>
+
         <input type="submit" value="ENTRAR" />
         <a className="links" onClick={() => navigate('/newUser')}>Cadastre-se</a>
         <span id="terms">Ao usar Checklist você concorda com os <a className="links" onClick={() => navigate('/terms')}>Termos de Uso</a></span>

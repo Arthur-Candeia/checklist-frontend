@@ -36,6 +36,12 @@ table {
     border: 1px solid black;
   }
 
+  #thTarefas {
+    min-width: 280px;
+    width: 50vw;
+    max-width: 500px;
+  }
+
   #inputTasks {
     width: 100%;
     padding: 5px;
