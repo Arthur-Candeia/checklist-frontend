@@ -4,7 +4,7 @@ import { newUserSave } from "../../connect/db";
 import {eyeClick} from "../Login/functions";
 import ButtonHome from "../Terms/ButtonHome";
 import { InputPassword, InputStandart } from "../Inputs/Inputs";
-import './newUser.scss'
+import './newUser.scss';
 
 export default function NewUser() {
   const [newUser, setNewUser] = useState('')
@@ -53,9 +53,9 @@ export default function NewUser() {
     <div id="newUserContainer">
       <form autoComplete="on" method="POST" onSubmit={(ev) => forCreateUser(ev)} id="formNewUser">
         <h1>CHECKLIST &#x2705;</h1>
-        <InputStandart id='newUser' user={newUser} changeUser={setNewUser}/>
-        <InputPassword id='newPassword' password={newPassword} changePassword={setnNewPassword} eyeClick={eyeClick} labelContent={'Nova Senha'}/>
-        <InputPassword id='confirmPassword' password={confirmPassword} changePassword={setConfirmPassword} eyeClick={eyeClick} labelContent={'Confirmar Senha'} confirmation={'inputs confirmContent'}/>
+        <InputStandart identify='newUser' user={newUser} changeUser={setNewUser}/>
+        <InputPassword identify='newPassword' password={newPassword} changePassword={setnNewPassword} eyeClick={eyeClick} labelContent={'Nova Senha'}/>
+        <InputPassword identify='confirmPassword' password={confirmPassword} changePassword={setConfirmPassword} eyeClick={eyeClick} labelContent={'Confirmar Senha'} confirmation={'inputs confirmContent'}/>
 
         <input type="submit" value="CADASTRAR-SE" />
         <ButtonHome></ButtonHome>

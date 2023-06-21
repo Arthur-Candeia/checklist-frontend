@@ -90,28 +90,18 @@
   padding-top: 10px;
   background-color: $blue;
   border-radius: 15px;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 0px);
   animation: appear 1s forwards ease;
 
   #progress{
     place-self: start;
     height: 10px;
     background-color: $purple;
-    animation: loading 3s 1.5s forwards ease-in;
+    animation: appear 3s 1.5s forwards ease-in;
   }
 }
 
 @keyframes appear {
-  from {
-    width: 0px;
-    
-  }
-  to {
-    width: 280px;
-  }
-}
-
-@keyframes loading {
   from {
     width: 0px;
     

@@ -40,8 +40,8 @@ export default function Login({userInfo}) {
     <div id="login">
       <form autoComplete="on" method="POST" onSubmit={(ev) => forLogin(ev)} id="formLogin">
         <h1>CHECKLIST &#x2705;</h1>
-        <InputStandart id='user' user={user} changeUser={setUser}/>
-        <InputPassword id='password' password={password} changePassword={setPassword} eyeClick={eyeClick}/>
+        <InputStandart identify='user' user={user} changeUser={setUser}/>
+        <InputPassword identify='password' password={password} changePassword={setPassword} eyeClick={eyeClick}/>
 
         <input type="submit" value="ENTRAR" />
         <a className="links" onClick={() => navigate('/newUser')}>Cadastre-se</a>
