@@ -17,7 +17,7 @@ export function InputPassword({identify, password, changePassword, eyeClick, lab
       {!confirmation ? <>
         <span className="eye visible" onClick={() => eyeClick(identify)}><AiOutlineEye /></span>
         <span className="eye invisible" onClick={() => eyeClick(identify)} style={{visibility: 'hidden'}}><AiOutlineEyeInvisible /></span>
-        <span className="err">.</span>
+        <span className="err" style={{visibility: 'hidden'}}>.</span>
       </> : ''}
     </div>
   )
