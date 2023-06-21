@@ -4,7 +4,7 @@ import { newUserSave } from "../../connect/db";
 import {eyeClick} from "../Login/functions";
 import ButtonHome from "../Terms/ButtonHome";
 import { InputPassword, InputStandart } from "../Inputs/Inputs";
-import './newUser.scss';
+import './NewUser.scss';
 
 export default function NewUser() {
   const [newUser, setNewUser] = useState('')
