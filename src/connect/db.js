@@ -15,8 +15,10 @@ export async function updateDoneTask(user, index, currentCondition, tdClass, loa
   loadPage()
 }
 
-export async function newTask(user, content, loadPage) {
-  await fetch(`https://checklist-fullstack.vercel.app/login/${user}/${content}?_method=post`, {method: 'POST'})
+export async function newTask(id, content, loadPage) {
+  const headers = new Headers({'Content-Type': 'application/json'})
+  let body = JSON.stringify({id, content})
+  await fetch(`https://checklist-fullstack.vercel.app/login?_method=post`, {headers, body, method: 'POST'})
   loadPage()
 }
 
@@ -25,8 +27,10 @@ export async function deleteTask(user, index, loadPage) {
   loadPage()
 }
 
-export async function editTask(user, index, content, loadPage) {
-  await fetch(`https://checklist-fullstack.vercel.app/login/${user}/${index}/${content}?_method=put`, {method: 'PUT'})
+export async function editTask(id, index, content, loadPage) {
+  const headers = new Headers({'Content-Type': 'application/json'})
+  let body = JSON.stringify({id, index, content})
+  await fetch(`https://checklist-fullstack.vercel.app/login?_method=put`, {headers, body, method: 'PUT'})
   loadPage()
 }
 

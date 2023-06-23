@@ -39,6 +39,11 @@ body {
     width: 90vw;
   }
 
+  #formLogin > .inputs > .eye, #formNewUser > .inputs > .eye {
+    top: 37%;
+    height: 22px;
+  }
+
   table {
     display: block;
     margin: 0 auto;
