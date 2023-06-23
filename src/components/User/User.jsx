@@ -27,9 +27,9 @@ export default function User({user}) {
   if (user || sessionStorage.data) {
   return (
     <div id="pageUser">
-      <h1 id="welcome">{loginUser.name ? `Olá, ${loginUser.name}!` : ''}
+      <div id="welcome">{loginUser.name ? <h1>{`Olá, ${loginUser.name}!`}</h1> : ''}
       <button id="logout" onClick={() => logout()}>SAIR</button>
-      </h1>
+      </div>
       <table>
         <TableHead
         itsNew={itsNew} saveTask={saveTask}
