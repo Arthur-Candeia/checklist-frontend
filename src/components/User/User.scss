@@ -1,7 +1,7 @@
 @import '../../styles/coolors.scss';
 
 #welcome {
-  align-self: end;
+  align-self: flex-end;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,6 +30,7 @@ table {
   border-collapse: collapse;
   display: block;
   padding: 10px;
+  align-self: flex-start;
 
   th, tr, td {
     padding: 5px;
