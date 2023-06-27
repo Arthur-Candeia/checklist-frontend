@@ -44,7 +44,7 @@ export default function Login({userInfo}) {
         <InputPassword identify='password' password={password} changePassword={setPassword} eyeClick={eyeClick}/>
 
         <input type="submit" value="ENTRAR" />
-        <a className="links" onClick={() => navigate('/newUser')}>Cadastre-se</a>
+        <a className="links" onClick={() => navigate('/newuser')}>Cadastre-se</a>
         <span id="terms">Ao usar Checklist você concorda com os <a className="links" onClick={() => navigate('/terms')}>Termos de Uso</a></span>
       </form>
     </div>
