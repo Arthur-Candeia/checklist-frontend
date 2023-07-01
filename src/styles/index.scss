@@ -47,23 +47,23 @@ body {
     display: block;
     margin: 0 auto;
     
-    th, tr, td {
+    th, td {
       padding: 3px 0px;
     }
 
     td {
       &.content {
         min-width: 50vw;
-        width: 63vw;
-        max-width: 400px;
+        width: 50vw;
+        max-width: 54vw;
         padding-left: 5px;
       }
     }
 
     #thTarefas {
       min-width: 50vw;
-      width: 63vw;
-      max-width: 400px;
+      width: 50vw;
+      max-width: 54vw;
     }
   }
 

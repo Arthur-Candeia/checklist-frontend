@@ -32,7 +32,12 @@ table {
   padding: 10px;
   align-self: flex-start;
 
-  th, tr, td {
+  tr {
+    background-color: $gray;
+    border: 1px solid black;
+  }
+
+  th {
     padding: 5px;
     background-color: $gray;
     border: 1px solid black;
@@ -45,7 +50,8 @@ table {
   }
 
   #inputTasks {
-    width: 100%;
+    width: calc(100% - 4px);
+    margin: 0px 2px;
     padding: 5px;
     border: none;
     outline: 2px solid transparent;
@@ -71,6 +77,9 @@ table {
 
   td {
     word-wrap: break-word;
+    padding: 5px;
+    background-color: $gray;
+    border: 1px solid black;
     &.content {
       min-width: 280px;
       width: 50vw;
@@ -78,16 +87,23 @@ table {
     }
 
     &.checks {
+      min-width: 80px;
       text-align: center;
+
+      input {
+        transform: scale(1.2);
+      }
     }
 
     &.options {
       text-align: center;
       min-width: 80px;
+      border: none;
 
       button {
         cursor: pointer;
         margin: 0px 4px;
+        width: 30px;
         padding: 5px;
         background-color: transparent;
         border: 0.5px solid rgba(0, 0, 0, 0.726);
