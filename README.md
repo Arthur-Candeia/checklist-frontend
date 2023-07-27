@@ -11,7 +11,9 @@ Projeto Full-Stack SPA feito com React e com hospedagem ativa no MongoDB Atlas! 
  - _Responsividade 📱:_ A aplicação funciona perfeitamente e de forma responsiva em vários dispositivos!
  - _CRUD 👤:_ O usuário consegue realizar atividades fundamentais com a aplicação!
 
-### Components
+### Resumo dos arquivos
+
+#### Components
 Aqui temos os componentes da nossa aplicação, que estão divididos em subpastas: <br />
 Inputs - Aqui estão os inputs da aplicação! <br />
 Login - Aqui estão os elementos da tela de login! <br />
