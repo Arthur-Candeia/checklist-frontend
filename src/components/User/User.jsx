@@ -1,49 +1,46 @@
 import { useEffect, useState } from "react"
-import hookUser from "./hookUser";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "./useUser";
 import TableHead from './TableHead';
 import TableBody from "./TableBody";
 import './User.scss';
 
-export default function User({user}) {
+export default function User({sucessLogin}) {
 
-  const {loadPage, saveTask, modifyTask, logout} = hookUser()
-  const [loginUser, setLoginUser] = useState('')
+  const {saveTask, modifyTask, logout, clearInfos} = useUser()
   const [inputTasks, setInputTasks] = useState('')
   const [itsNew, setItsNew] = useState(true)
   const [positionTask, setPositionTask] = useState('')
   const [done, setDone] = useState()
-  
+  const [tasks, setTasks] = useState()
 
   useEffect(() => {
-    if (user) {
-      setLoginUser(user.user)
-      sessionStorage.data = JSON.stringify(user.user)
-    }
-    else {
-      loadPage(setLoginUser)
-    }
+    if (!sessionStorage.token || !sessionStorage.secret || !sucessLogin) clearInfos()
+    else if (sucessLogin) setTasks(JSON.parse(sessionStorage.tasks))
   }, [])
 
-  if (user || sessionStorage.data) {
+  if (sucessLogin && sessionStorage.token) {
   return (
     <div id="pageUser">
-      <div id="welcome">{loginUser.name ? <h1>{`Olá, ${loginUser.name}!`}</h1> : ''}
+      <div id="welcome">{sessionStorage.name ? <h1>{`Olá, ${JSON.parse(sessionStorage.name)}!`}</h1> : ''}
       <button id="logout" onClick={() => logout()}>SAIR</button>
       </div>
       <table>
         <TableHead
         itsNew={itsNew} saveTask={saveTask}
-        loginUser={loginUser} inputTasks={inputTasks}
-        setInputTasks={setInputTasks} setLoginUser={setLoginUser}
+        setTasks={setTasks}
+        inputTasks={inputTasks}
+        setInputTasks={setInputTasks}
         positionTask={positionTask} setItsNew={setItsNew}
         modifyTask={modifyTask}>
         </TableHead>
 
         <TableBody
-        loginUser={loginUser} setDone={setDone}
-        loadPage={loadPage} setLoginUser={setLoginUser}
+        setDone={setDone}
+        setTasks={setTasks}
         setInputTasks={setInputTasks} setItsNew={setItsNew}
         setPositionTask={setPositionTask}
+        tasks={tasks}
         >
         </TableBody>
         </table>

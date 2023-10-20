@@ -4,7 +4,7 @@ export function InputStandart({identify, user, changeUser}) {
   return (
     <div className="inputs">
       <label htmlFor={identify}>Usuário</label>
-      <input type="text" name={identify} id={identify} title={identify} value={user} onChange={(ev) => changeUser(ev.target.value)} required minLength={4}/>
+      <input type="text" name={identify} id={identify} title={identify} value={user} onChange={(ev) => changeUser(ev.target.value)} required minLength={4} autoFocus/>
     </div>
   )
 }

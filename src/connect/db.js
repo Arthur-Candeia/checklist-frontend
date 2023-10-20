@@ -1,43 +1,50 @@
+import { BASE_URL } from "./BASE_URL"
+
+function secret() {
+  return JSON.parse(sessionStorage.secret ?? '{}')
+}
+
+function headers() {
+  return {
+    'Content-Type': 'application/json', 
+    'Authorization': `Bearer ${JSON.parse(sessionStorage.token ?? '{}')}`
+  }
+}
+
 export async function userLogin(name, password) {
   const headers = new Headers({'Content-Type': 'application/json'})
-  let body = JSON.stringify({name, password})
-  const result = await fetch('https://checklist-fullstack.vercel.app', {headers, body, method: 'POST'})
+  const body = JSON.stringify({name, password})
+  const result = await fetch(`${BASE_URL}`, {headers, body, method: 'POST'})
   const data = await result.json()
   return data;
 }
 
-export async function updateDoneTask(user, index, currentCondition, tdClass, loadPage) {
-  const newCondition = currentCondition ? 'false' : 'true'
-
+export async function updateDoneTask(index, currentCondition, tdClass) {
   document.getElementById(tdClass).classList.toggle('checked')
-
-  await fetch(`https://checklist-fullstack.vercel.app/login/done/${user}/${index}/${newCondition}?_method=put`, {method: 'PUT'})
-  loadPage()
+  const body = JSON.stringify({secret: secret()})
+  const response = await fetch(`${BASE_URL}/login/done/${index}/${!currentCondition}`, {method: 'PUT', headers: headers(), body})
+  if (response.json().then((result) => result.hasOwnProperty('msg'))) return null
 }
 
-export async function newTask(id, content, loadPage) {
-  const headers = new Headers({'Content-Type': 'application/json'})
-  let body = JSON.stringify({id, content})
-  await fetch(`https://checklist-fullstack.vercel.app/login?_method=post`, {headers, body, method: 'POST'})
-  loadPage()
+export async function newTask(content) {
+  const body = JSON.stringify({content, secret: secret()})
+  await fetch(`${BASE_URL}/login`, {headers: headers(), body, method: 'POST'})
 }
 
-export async function deleteTask(user, index, loadPage) {
-  await fetch(`https://checklist-fullstack.vercel.app/login/${user}/${index}?_method=delete`, {method: 'DELETE'})
-  loadPage()
+export async function deleteTask(index) {
+  const body = JSON.stringify({secret: secret()})
+  await fetch(`${BASE_URL}/login/${index}`, {method: 'DELETE', headers: headers(), body})
 }
 
-export async function editTask(id, index, content, loadPage) {
-  const headers = new Headers({'Content-Type': 'application/json'})
-  let body = JSON.stringify({id, index, content})
-  await fetch(`https://checklist-fullstack.vercel.app/login?_method=put`, {headers, body, method: 'PUT'})
-  loadPage()
+export async function editTask(index, content) {
+  let body = JSON.stringify({index, content, secret: secret()})
+  await fetch(`${BASE_URL}/login`, {headers: headers(), body, method: 'PUT'})
 }
 
 export async function newUserSave(name, password) {
   const headers = new Headers({'Content-Type': 'application/json'})
   let body = JSON.stringify({name, password})
-  const result = await fetch('https://checklist-fullstack.vercel.app/newuser', {headers, body, method: 'POST'})
+  const result = await fetch(`${BASE_URL}/newuser`, {headers, body, method: 'POST'})
   const data = await result.json()
   return data;
 }

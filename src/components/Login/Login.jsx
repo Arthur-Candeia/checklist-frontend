@@ -5,27 +5,21 @@ import {eyeClick} from "./functions";
 import { InputPassword, InputStandart } from "../Inputs/Inputs";
 import './Login.scss'
 
-export default function Login({userInfo}) {
+export default function Login({userInfoLogin}) {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
-
-  function changeUser(ev) {
-    setUser(ev.target.value)
-  }
-
-  function changePassword(ev) {
-    setPassword(ev.target.value)
-  }
 
   function forLogin(ev) {
     ev.preventDefault()
     document.querySelector('.err').style.visibility = 'hidden'
     userLogin(user, password).then((result) => {
       if (!result.err) {
-        sessionStorage.user = user
-        sessionStorage.password = password
-        userInfo(result)
+        sessionStorage.token = JSON.stringify(result.token)
+        sessionStorage.secret = JSON.stringify(result.secret)
+        sessionStorage.tasks = JSON.stringify(result.tasks)
+        sessionStorage.name = JSON.stringify(result.name)
+        userInfoLogin(true)
         navigate('/login')
       }
       else {
