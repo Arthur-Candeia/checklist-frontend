@@ -10,7 +10,7 @@ export function useUser() {
     setTasks(saveTaskInSS(inputTasks))
     setInputTasks('')
     const result = await newTask(inputTasks)
-    result == null ? logout() : ''
+    result === null ? clearInfos() : ''
   }
   
   async function modifyTask(ev, positionTask, inputTasks, setInputTasks, setItsNew, setTasks) {
@@ -19,20 +19,20 @@ export function useUser() {
     setInputTasks('')
     setItsNew(true)
     const result = await editTask(positionTask, inputTasks)
-    result == null ? logout() : ''
+    result === null ? clearInfos() : ''
   }
 
   async function updateDone(ev, index, currentCondition, tdClass, setTasks) {
     setTasks(updateDoneInSS(index, currentCondition))
     const result = await updateDoneTask(index, currentCondition, tdClass)
-    result == null ? logout() : ''
+    result === null ? clearInfos() : ''
   }
 
   async function removeTask(ev, index, setTasks) {
     ev.preventDefault()
     setTasks(removeTaskInSS(index))
     const result = await deleteTask(index)
-    result == null ? logout() : ''
+    result === null ? clearInfos() : ''
   }
   
   function logout() {

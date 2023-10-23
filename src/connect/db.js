@@ -23,22 +23,29 @@ export async function updateDoneTask(index, currentCondition, tdClass) {
   document.getElementById(tdClass).classList.toggle('checked')
   const body = JSON.stringify({secret: secret()})
   const response = await fetch(`${BASE_URL}/login/done/${index}/${!currentCondition}`, {method: 'PUT', headers: headers(), body})
-  if (response.json().then((result) => result.hasOwnProperty('msg'))) return null
+  if (await response.json().then((result) => result.hasOwnProperty('msg'))) return null
+  return true
 }
 
 export async function newTask(content) {
   const body = JSON.stringify({content, secret: secret()})
-  await fetch(`${BASE_URL}/login`, {headers: headers(), body, method: 'POST'})
+  const response = await fetch(`${BASE_URL}/login`, {headers: headers(), body, method: 'POST'})
+  if (await response.json().then((result) => result.hasOwnProperty('msg'))) return null
+  return true
 }
 
 export async function deleteTask(index) {
   const body = JSON.stringify({secret: secret()})
-  await fetch(`${BASE_URL}/login/${index}`, {method: 'DELETE', headers: headers(), body})
+  const response = await fetch(`${BASE_URL}/login/${index}`, {method: 'DELETE', headers: headers(), body})
+  if (await response.json().then((result) => result.hasOwnProperty('msg'))) return null
+  return true
 }
 
 export async function editTask(index, content) {
   let body = JSON.stringify({index, content, secret: secret()})
-  await fetch(`${BASE_URL}/login`, {headers: headers(), body, method: 'PUT'})
+  const response = await fetch(`${BASE_URL}/login`, {headers: headers(), body, method: 'PUT'})
+  if (await response.json().then((result) => result.hasOwnProperty('msg'))) return null
+  return true
 }
 
 export async function newUserSave(name, password) {
